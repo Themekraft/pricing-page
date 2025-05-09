@@ -16,7 +16,6 @@ function buddyforms_freemius_checkout_script() {
 		wp_enqueue_script( 'pricing-page', plugin_dir_url( __FILE__ ) . 'build/js/pricing-page.js', array( 'freemius-checkout' ), filemtime( plugin_dir_path( __FILE__ ) . 'build/js/pricing-page.js' ), true );
 		wp_enqueue_style( 'pricing-page', plugin_dir_url( __FILE__ ) . 'build/css/pricing-page.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'build/css/pricing-page.css' ) );
 	}
-
 }
 add_action( 'admin_enqueue_scripts', 'buddyforms_freemius_checkout_script' );
 
