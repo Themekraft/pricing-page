@@ -1,5 +1,5 @@
 {
-  "name": "buddyforms-pricing-page",
+  "name": "themekraft-pricing-page",
   "version": "1.0.0",
   "scripts": {
     "js:build": "esbuild src/js/*.js --bundle --outdir=build/js/",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/BuddyForms/buddyforms-pricing-page.git"
+    "url": "git+ssh://git@github.com/Themekraft/pricing-page.git"
   },
   "author": "Camilo Luna",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BuddyForms/buddyforms-pricing-page/issues"
+    "url": "https://github.com/Themekraft/pricing-page/issues"
   },
-  "homepage": "https://github.com/BuddyForms/buddyforms-pricing-page#readme",
+  "homepage": "https://github.com/Themekraft/pricing-page#readme",
   "description": "",
   "devDependencies": {
     "@pragmatics/stylelint-config-order": "^2.2.3",
