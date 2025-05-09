@@ -2,10 +2,10 @@
   "name": "buddyforms-pricing-page",
   "version": "1.0.0",
   "scripts": {
-    "js:build": "esbuild src/js/script.js --bundle --outfile=build/js/script.js",
+    "js:build": "esbuild src/js/*.js --bundle --outdir=build/js/",
     "sass:build": "sass src/sass:build/css --no-source-map --style=compressed -I node_modules",
     "sass:lint": "stylelint src/sass/**/*.scss --fix",
-    "js:watch": "esbuild src/js/script.js --bundle --sourcemap --outfile=build/js/script.js --watch",
+    "js:watch": "esbuild src/js/*.js --bundle --sourcemap --outdir=build/js/ --watch",
     "sass:dev": "sass src/sass:build/css --source-map --style=expanded -I node_modules",
     "css:watch": "watch 'npm run sass:lint && npm run sass:dev' src/sass",
     "build": "rm -rf build && npm run js:build && npm run sass:build",
