@@ -12,7 +12,7 @@ if ( ! function_exists( 'buddyforms_freemius_checkout_script' ) ) {
 	 * @return void
 	 */
 	function buddyforms_freemius_checkout_script() {
-		if ( 'buddyforms_page_buddyforms_bundle_screen' === get_current_screen()->id ) {
+		if ( str_contains( get_current_screen()->id, 'bundle_screen' ) ) {
 			wp_enqueue_script( 'freemius-checkout', 'https://checkout.freemius.com/js/v1/', array(), '1', true );
 			wp_enqueue_script( 'pricing-page', plugin_dir_url( __FILE__ ) . 'build/js/pricing-page.js', array( 'freemius-checkout' ), filemtime( plugin_dir_path( __FILE__ ) . 'build/js/pricing-page.js' ), true );
 			wp_enqueue_style( 'pricing-page', plugin_dir_url( __FILE__ ) . 'build/css/pricing-page.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'build/css/pricing-page.css' ) );
