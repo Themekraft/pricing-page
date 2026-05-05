@@ -64,6 +64,18 @@ if ( ! function_exists( 'tk_pricing_page_get_config' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tk_pricing_page_color_menu_link' ) ) {
+	/**
+	 * Color the host plugin's "Go Pro!" submenu link orange so it pops in the
+	 * admin sidebar. Matches any link whose `href` ends in `_bundle_screen`,
+	 * which is the convention every host plugin uses for its Go Pro page slug.
+	 */
+	function tk_pricing_page_color_menu_link() {
+		echo '<style id="tk-pricing-page-menu">#adminmenu a[href*="bundle_screen"]{color:#fca300}</style>';
+	}
+}
+add_action( 'admin_print_styles', 'tk_pricing_page_color_menu_link' );
+
 if ( ! function_exists( 'tk_pricing_page_enqueue_assets' ) ) {
 	/**
 	 * Enqueue Freemius checkout + pricing-page assets on any admin screen
