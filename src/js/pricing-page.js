@@ -1,38 +1,46 @@
-// Vanilla JS (new)
-class BuddyFormsPricingPage {
-  constructor() {
-      this.purchaseButtons = document.querySelectorAll("[data-purchase-licenses]");
-      this.productId = "2046";
-      this.planId = "4316";
-      this.publicKey = "pk_ee958df753d34648b465568a836aa";
+(function () {
+  const config = window.tkPricingPageConfig || { bundle: {}, tiers: [] };
+  const bundle = config.bundle || {};
 
-      this.purchaseHandler = null;
-
-    this.init();
+  if (!bundle.product_id || !bundle.public_key) {
+    return;
   }
 
-  init() {
-    this.purchaseHandler = new FS.Checkout({
-      product_id: this.productId,
-      plan_id: this.planId,
-      public_key: this.publicKey,
-    });
+  if (!Array.isArray(config.tiers) || !config.tiers.length) {
+    return;
+  }
 
-    this.purchaseButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        this.purchasePlanHandler(e);
+  if (typeof FS === "undefined" || typeof FS.Checkout !== "function") {
+    return;
+  }
+
+  const checkoutOptions = {
+    product_id: bundle.product_id,
+    public_key: bundle.public_key,
+  };
+
+  if (bundle.plan_id) {
+    checkoutOptions.plan_id = bundle.plan_id;
+  }
+
+  if (bundle.name) {
+    checkoutOptions.name = bundle.name;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkout = new FS.Checkout(checkoutOptions);
+
+    document
+      .querySelectorAll(".tk-pricing__button[data-tier-id]")
+      .forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const card = button.closest(".tk-pricing__box");
+          const licenses = card ? card.dataset.licenses : "1";
+          checkout.open({ licenses: licenses });
+        });
       });
-    });
-  }
 
-  purchasePlanHandler(e) {
-    const licenses = e.target.dataset.purchaseLicenses;
-    this.purchaseHandler.open({
-      licenses: licenses,
-    });
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  bfPricingPage = new BuddyFormsPricingPage();
-});
+    window.tkPricingPage = checkout;
+  });
+})();
