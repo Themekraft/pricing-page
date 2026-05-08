@@ -53,6 +53,7 @@ if ( ! function_exists( 'tk_pricing_page_get_config' ) ) {
 						'period'    => '/year',
 						'highlight' => false,
 						'bullets'   => array(),
+						// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- this submodule ships its own `tk-pricing-page` text domain by design; each host plugin embeds the same Pricing UI so the strings are localized once at the submodule layer rather than per host.
 						'cta_label' => __( 'Get Started', 'tk-pricing-page' ),
 					)
 				);
@@ -121,6 +122,7 @@ if ( ! function_exists( 'tk_pricing_page_render' ) ) {
 
 		if ( empty( $config['tiers'] ) || empty( $config['bundle']['product_id'] ) ) {
 			echo '<div class="notice notice-warning"><p>';
+			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- submodule's own `tk-pricing-page` text domain (see top-of-file note).
 			esc_html_e( 'Pricing page is not fully configured. The host plugin must register the `tk_pricing_page_config` filter with `bundle` credentials and at least one `tiers` entry.', 'tk-pricing-page' );
 			echo '</p></div>';
 			return;
@@ -129,6 +131,7 @@ if ( ! function_exists( 'tk_pricing_page_render' ) ) {
 		<div class="tk-pricing">
 			<div class="tk-pricing__container">
 				<header class="tk-pricing__header">
+					<?php // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- submodule's own `tk-pricing-page` text domain (see top-of-file note). ?>
 					<p class="tk-pricing__pre-heading"><?php esc_html_e( 'Pricing', 'tk-pricing-page' ); ?></p>
 					<?php if ( '' !== $config['heading'] ) : ?>
 						<h1 class="tk-pricing__heading"><?php echo esc_html( $config['heading'] ); ?></h1>
