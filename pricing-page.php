@@ -22,6 +22,7 @@ if ( ! function_exists( 'tk_pricing_page_get_config' ) ) {
 	 *
 	 * @return array<string,mixed>
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- shared submodule API: every host plugin (BuddyForms, WooBuddy, AIO, TK Google Fonts) loads the same names behind function_exists(), so they keep the submodule's own tk_pricing_page_ prefix instead of one host's prefix.
 	function tk_pricing_page_get_config() {
 		$defaults = array(
 			'heading'    => '',
@@ -35,6 +36,7 @@ if ( ! function_exists( 'tk_pricing_page_get_config' ) ) {
 			'tiers'      => array(),
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- shared filter every host plugin uses to pass its config (see the README); the name stays the same in every host.
 		$config = wp_parse_args( apply_filters( 'tk_pricing_page_config', $defaults ), $defaults );
 
 		$config['bundle'] = wp_parse_args( (array) $config['bundle'], $defaults['bundle'] );
@@ -71,6 +73,7 @@ if ( ! function_exists( 'tk_pricing_page_color_menu_link' ) ) {
 	 * admin sidebar. Matches any link whose `href` ends in `_bundle_screen`,
 	 * which is the convention every host plugin uses for its Go Pro page slug.
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- shared submodule API: every host plugin (BuddyForms, WooBuddy, AIO, TK Google Fonts) loads the same names behind function_exists(), so they keep the submodule's own tk_pricing_page_ prefix instead of one host's prefix.
 	function tk_pricing_page_color_menu_link() {
 		echo '<style id="tk-pricing-page-menu">#adminmenu a[href*="bundle_screen"]{color:#fca300}</style>';
 	}
@@ -82,6 +85,7 @@ if ( ! function_exists( 'tk_pricing_page_enqueue_assets' ) ) {
 	 * Enqueue Freemius checkout + pricing-page assets on any admin screen
 	 * whose id contains `bundle_screen` (the convention used across host plugins).
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- shared submodule API: every host plugin (BuddyForms, WooBuddy, AIO, TK Google Fonts) loads the same names behind function_exists(), so they keep the submodule's own tk_pricing_page_ prefix instead of one host's prefix.
 	function tk_pricing_page_enqueue_assets() {
 		$screen = get_current_screen();
 		if ( ! $screen || ! str_contains( $screen->id, 'bundle_screen' ) ) {
@@ -117,6 +121,7 @@ if ( ! function_exists( 'tk_pricing_page_render' ) ) {
 	/**
 	 * Render the pricing page. Use as the callback for `add_submenu_page()` in each host plugin.
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- shared submodule API: every host plugin (BuddyForms, WooBuddy, AIO, TK Google Fonts) loads the same names behind function_exists(), so they keep the submodule's own tk_pricing_page_ prefix instead of one host's prefix.
 	function tk_pricing_page_render() {
 		$config = tk_pricing_page_get_config();
 
@@ -156,6 +161,7 @@ if ( ! function_exists( 'buddyforms_bundle_screen_content' ) ) {
 	 * Backward-compat alias for host plugins still passing the old callback name to `add_submenu_page()`.
 	 * Remove once every host plugin has migrated its menu callback to `tk_pricing_page_render`.
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- backward-compatibility callback name: BuddyForms 2.9.x passes it to add_submenu_page(), and on a site with several hosts the first copy of this file to load defines it, so the name cannot change.
 	function buddyforms_bundle_screen_content() {
 		tk_pricing_page_render();
 	}
@@ -167,6 +173,7 @@ if ( ! function_exists( 'tk_pricing_page_render_tier' ) ) {
 	 *
 	 * @param array<string,mixed> $tier Normalized tier data.
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- shared submodule API: every host plugin (BuddyForms, WooBuddy, AIO, TK Google Fonts) loads the same names behind function_exists(), so they keep the submodule's own tk_pricing_page_ prefix instead of one host's prefix.
 	function tk_pricing_page_render_tier( $tier ) {
 		$box_class = 'tk-pricing__box' . ( ! empty( $tier['highlight'] ) ? ' tk-pricing__box--highlight' : '' );
 		?>
